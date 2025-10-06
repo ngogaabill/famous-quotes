@@ -1,6 +1,7 @@
 package com.pluralsight;
 
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -12,9 +13,9 @@ public class Main {
                 "The only way to do great work is to love what you do. – Steve Jobs",
                 "Discipline equals freedom. – Jocko Willink"};
         Scanner scnr = new Scanner(System.in);
-        String repeat;
+        Random random = new Random();
+        String repeat = "yes";
         do {
-
             System.out.println("Enter a number to print a quote(1-4)");
             try {
                 int input = scnr.nextInt();
@@ -24,10 +25,19 @@ public class Main {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.err.println("Number is out of range");
             }
-            System.out.println("Do you want to see another quote(Yes/No)");
+            System.out.println("Do you want to generate a random quote:(yes/no)");
             scnr.nextLine();
+            String randomAnswer = scnr.nextLine();
+            if (randomAnswer.equalsIgnoreCase("yes")) {
+                String randomQuote = quotes[random.nextInt(1, 5)];//create a random quote from the array
+                System.out.println("random quote:\n" + randomQuote);
+            } else {
+                continue;
+            }
+            System.out.println("Do you want to see another quote(Yes/No)");
+            //scnr.nextLine();
             repeat = scnr.nextLine();
-            if(repeat.equalsIgnoreCase("No")){
+            if (repeat.equalsIgnoreCase("No")) {
                 break;
             }
         } while (repeat.equalsIgnoreCase("Yes"));
